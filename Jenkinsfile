@@ -43,6 +43,11 @@ pipeline {
                 }
         
             }
+	  stage('Test') {
+            steps {
+                sh 'mvn test'
+            }
+        }
         stage('Verify ') {
             steps {
             script {
