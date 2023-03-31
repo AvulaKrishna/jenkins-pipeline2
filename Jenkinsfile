@@ -19,37 +19,21 @@ pipeline {
                 }
             }
         }
-	
-
-        stage('Build ') {
-            steps {
-            script {
-                sh "cd ${WORKSPACE}/jenkins-pipeline2 "
-                sh "cd jenkins-pipeline2 && mvn clean install "
-            }
-        }
-        }
-	stage ('Code Quality') {
-        steps {
-            withSonarQubeEnv('SonarQube') {
-            sh 'mvn -f pom.xml sonar:sonar'
-            }
-      }
     }
-        stage('Verify ') {
-            steps {
-            script {
-                sh "cd ${WORKSPACE}/jenkins-pipeline2 "
-                sh "ls -lhrt jenkins-pipeline2 "
-            }
-        }
-        }        
-        
-		}
-		
-     post { 
-         always { 
-            cleanWs()
-         }
-    }		
 }
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+	    
+
+	
