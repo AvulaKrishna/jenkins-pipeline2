@@ -2,16 +2,7 @@ pipeline {
     agent any
 
     stages {
-    
-        stage("CI/CD: Warm Up"){
-            steps {
-                script {
-                    sh "java -version"
-
-                }
-            }
-        }
-		
+    	
 	stage("Checkout from SCM"){
             steps {
                 script {
