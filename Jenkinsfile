@@ -15,10 +15,11 @@ pipeline {
 		stage("Checkout from SCM"){
             steps {
                 script {
-                    sh "git clone https://github.com/techmartguru/jenkins-pipeline2.git"				
+                    sh "git clone https://github.com/theopskart22/jenkins-pipeline2.git"				
                 }
             }
         }
+	
 
         stage('Build ') {
             steps {
@@ -28,6 +29,13 @@ pipeline {
             }
         }
         }
+	stage ('Code Quality') {
+        steps {
+            withSonarQubeEnv('My_SonarQube') {
+            sh 'mvn -f pom.xml sonar:sonar'
+            }
+      }
+    }
         stage('Verify ') {
             steps {
             script {
