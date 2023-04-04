@@ -43,11 +43,30 @@ pipeline {
                 }
         
             }
+	  
 	  stage('Test') {
             steps {
                 sh 'mvn test'
             }
         }
+	stage('Build Docker Image') {
+    steps {
+        script {
+            docker.build("my-java-app:${env.BUILD_ID}")
+        }
+    }
+}
+        stage('Push Docker Image') {
+    steps {
+        script {
+            docker.withRegistry('http://18.207.197.146:8081.com', 'nexus-credentials') {
+                dockerImage.push("${env.BUILD_ID}")
+                dockerImage.push("latest")
+            }
+        }
+    }
+}
+
         stage('Verify ') {
             steps {
             script {
