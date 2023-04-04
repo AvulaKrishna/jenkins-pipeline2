@@ -43,6 +43,12 @@ pipeline {
                 }
         
             }
+	  stage('Upload to Nexus') {
+            steps {
+                sh 'mvn deploy'
+    }
+}
+
 	  
 	  stage('Test') {
             steps {
