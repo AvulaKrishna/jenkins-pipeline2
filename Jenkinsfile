@@ -70,9 +70,9 @@ pipeline {
     steps {
         sshagent(['MyEC2Key']) {
             sh '''
-                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker pull 18.207.197.146:8081/my-java-app:latest"
+                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker pull 18.207.197.146:8000/my-java-app:latest"
                 ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker stop my-java-app || true && docker rm my-java-app || true"
-                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker run -d --name my-java-app -p 8080:8080 18.207.197.146:8081/my-java-app:latest"
+                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker run -d --name my-java-app -p 8000:8000 18.207.197.146:8000/my-java-app:latest"
             '''
         }
     }
