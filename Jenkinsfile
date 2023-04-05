@@ -43,46 +43,7 @@ pipeline {
                 }
         
             }
-	  stage('Upload to Nexus') {
-            steps {
-                sh 'mvn deploy'
-    }
-}
-
 	  
-	  stage('Test') {
-            steps {
-                sh 'mvn test'
-            }
-        }
-	stage('Build Docker Image') {
-    steps {
-        script {
-            docker.build("my-java-app:${env.BUILD_ID}")
-        }
-    }
-}
-        stage('Push Docker Image') {
-    steps {
-        script {
-            docker.withRegistry('http://18.207.197.146:8081.com', 'nexus-credentials') {
-                dockerImage.push("${env.BUILD_ID}")
-                dockerImage.push("latest")
-            }
-        }
-    }
-}
-	stage('Deploy to EC2') {
-    steps {
-        sshagent(['MyEC2Key']) {
-            sh '''
-                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker pull 18.207.197.146:8000/my-java-app:latest"
-                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker stop my-java-app || true && docker rm my-java-app || true"
-                ssh -o StrictHostKeyChecking=no ec2-user@18.207.197.146 "docker run -d --name my-java-app -p 8000:8000 18.207.197.146:8000/my-java-app:latest"
-            '''
-        }
-    }
-}
 
 
         stage('Verify ') {
