@@ -43,6 +43,20 @@ pipeline {
                 }
         
             }
+        stage('Build Docker image') {
+             steps {
+             sh 'docker build -t my-app .'
+          }
+       }
+         stage('Push Docker image') {
+             steps {
+             withCredentials([usernamePassword(credentialsId: 'dockerhub-creds', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+             sh 'docker login -u krishna009000 -p Informa@123'
+             sh 'docker tag my-app <dockerhub-username>/my-app'
+             sh 'docker push <dockerhub-username>/my-app'
+        }
+      }
+    }
 	  
 
 
