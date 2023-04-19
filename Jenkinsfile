@@ -53,18 +53,6 @@ pipeline {
         }
         }        
         
-		}
-     	stage('Deploy') {
-            steps {
-                // Copy the artifact to EC2 instance
-                sh 'scp target/my-app.jar ec2-user@<http://3.86.95.111>:~/my-app.jar' // Replace with your artifact details and EC2 public IP
-
-                // SSH into EC2 instance and run Docker image
-                sh 'ssh ec2-user@<http://3.86.95.111> "docker stop my-app; docker rm my-app; docker pull my-docker-image; docker run -d -p 80:8080 --name my-app my-docker-image"' // Replace with your Docker image details and EC2 public IP
-            }
-        }
-    }
-}
 		
      post { 
          always { 
