@@ -62,23 +62,16 @@ pipeline {
         //sh 'aws ecr-public get-login-password --region eu-west-2 | docker login --username AWS --password-stdin public.ecr.aws/t7e2c6o4'
         //withAWS(credentials: 'sam-jenkins-demo-credentials', region: 'eu-west-2') {
          withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}", "AWS_SECRET_ACCESS_KEY=${env.AWS_SECRET_ACCESS_KEY}", "AWS_DEFAULT_REGION=${env.AWS_DEFAULT_REGION}"]) {
-          sh 'docker login -u AWS -p $(aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/e1v1o6y4'
+          sh 'docker login -u AWS -p $(aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 090356033263.dkr.ecr.us-east-1.amazonaws.com
           sh 'docker build -t ecr-demoimg .'
-          sh 'docker tag ecr-demoimg:latest public.ecr.aws/e1v1o6y4/ecr-demoimg:latest'
-          sh 'docker push public.ecr.aws/e1v1o6y4/ecr-demoimg:latest'
+          sh 'docker tag ecr-demoimg:latest 090356033263.dkr.ecr.us-east-1.amazonaws.com/ecr-demoimg:latest'
+          sh 'docker push 090356033263.dkr.ecr.us-east-1.amazonaws.com/ecr-demoimg:latest'
          }
        }
     }
   }
 }
-          sh 'docker build -t frankdemo .'
-          sh 'docker tag frankdemo:latest public.ecr.aws/t7e2c6o4/frankdemo:latest'
-          sh 'docker push public.ecr.aws/t7e2c6o4/frankdemo:latest'
-         }
-       }
-    }
-  }
-}
+
 		
      post { 
          always { 
