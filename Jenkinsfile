@@ -71,6 +71,26 @@ pipeline {
     }
   }
 }
+      stages {
+    stage('Build') {
+      steps {
+        // Build your Docker image
+        sh 'docker build -t your-image-name .'
+      }
+    }
+    stage('Push') {
+      steps {
+        // Authenticate with AWS ECR
+        withCredentials([awsEcr(credentialsId: 'AWSInforma', region: 'us-east-1')]) {
+          // Tag the Docker image
+          sh 'docker tag your-image-name:latest AWSInforma.dkr.ecr.us-east-1.amazonaws.com/your-repo-name:latest'
+          // Push the Docker image to ECR
+          sh 'docker push AWSInforma.dkr.ecr.us-east-1.amazonaws.com/your-repo-name:latest'
+        }
+      }
+    }
+  }
+}
 
 		
      post { 
