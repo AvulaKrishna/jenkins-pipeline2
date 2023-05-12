@@ -15,7 +15,7 @@ pipeline {
 		stage("Checkout from SCM"){
             steps {
                 script {
-                    sh "git clone https://github.com/theopskart22/jenkins-pipeline2.git"				
+                    sh "git clone https://github.com/AvulaKrishna/jenkins-pipeline2.git "				
                 }
             }
         }
@@ -38,7 +38,7 @@ pipeline {
     }
 	stage ('Nexus upload') {
                 steps {
-                           nexusArtifactUploader artifacts: [[artifactId: 'gs-spring-boot-docker', classifier: '', file: 'target/gs-spring-boot-docker-0.1.0.jar', type: 'jar']], credentialsId: 'f9730db0-6e33-4fff-936a-9503099c7fb0', groupId: 'org.springframework.boot', nexusUrl: 'http:3.88.222.99:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.1.0-SNAPSHOT'
+                           nexusArtifactUploader artifacts: [[artifactId: 'gs-spring-boot-docker', classifier: '', file: 'target/gs-spring-boot-docker-0.1.0.jar', type: 'jar']], credentialsId: '7fe36265-930a-45f6-9a6a-43ea0f3d1d12', groupId: 'org.springframework.boot', nexusUrl: 'http://54.221.53.183:8081/', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '0.1.0-SNAPSHOT'
  
                 }
         
